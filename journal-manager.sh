@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source Nodes.sh
+source ./Nodes.sh
 SLAVES=$JN_Nodes
 
 start_time=`date +%s`
