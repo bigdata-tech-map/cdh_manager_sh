@@ -1,5 +1,11 @@
 #!/bin/bash
 
+ALL_Nodes=(
+    "lu-worker-1"
+    "lu-worker-2"
+    "lu-worker-3"
+)
+
 # Name Nodes
 NN_Nodes=(
     "lu-worker-1"
@@ -32,6 +38,11 @@ NM_Nodes=(
     "lu-worker-3"
 )
 
+# httpfs
+HTTPFS_Nodes=(
+    "lu-worker-2"
+)
+
 # Journal Nodes
 JN_Nodes=(
     "lu-worker-1"
@@ -51,6 +62,20 @@ ZK_Nodes=(
     "lu-worker-3"
 )
 
+# HiveServer2
+HIVE_Server2=(
+    "lu-worker-3"
+)
+# HiveMetastore
+HIVE_Metastore=(
+    "lu-worker-3"
+)
+
+# Hue Server
+Hue_Server=(
+    "lu-worker-3"
+)
+
 
 declare -A CDH_Services
 CDH_Services=(
@@ -62,6 +87,10 @@ CDH_Services=(
     [jns]="hadoop-hdfs-journalnode"
     [jhs]="hadoop-mapreduce-historyserver"
     [zks]="zookeeper-server"
+    [hiveserver2]="hive-server2"
+    [hivemetastore]="hive-metastore"
+    [httpfs]="hadoop-httpfs"
+    [hue]="hue"
 )
 
 getNodesOfService(){
@@ -74,6 +103,10 @@ case $1 in
         jns)  service_nodes=${JN_Nodes[@]} ;;
         jhs)  service_nodes=${JH_Nodes[@]} ;;
         zks)  service_nodes=${ZK_Nodes[@]} ;;
+        hiveserver2)  service_nodes=${HIVE_Server2[@]} ;;
+        hivemetastore)  service_nodes=${HIVE_Metastore[@]} ;;
+        httpfs)  service_nodes=${HTTPFS_Nodes[@]} ;;
+        hue)  service_nodes=${Hue_Server[@]} ;;
         *)      echo -e "Error, not exist nodes of "$1"\n" && exit ;;
 esac
 }
